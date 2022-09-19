@@ -7,9 +7,8 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^5.3.3",
     "nuxt": "^3.0.0-rc.10",
     "push-dir": "^0.4.1"
-  },
-  "dependencies": {
   }
 }
