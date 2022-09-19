@@ -5,6 +5,6 @@ export default defineNuxtConfig({
         base: '/nuxt3-brotli/'
       },
       experimental:{
-        inlineSSRStyles:false
+        inlineSSRStyles:true
       }
   });
