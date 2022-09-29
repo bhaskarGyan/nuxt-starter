@@ -1,0 +1,33 @@
+diff --git a/node_modules/nuxt/dist/core/runtime/nitro/renderer.mjs b/node_modules/nuxt/dist/core/runtime/nitro/renderer.mjs
+index ae61b9f..1a64221 100644
+--- a/node_modules/nuxt/dist/core/runtime/nitro/renderer.mjs
++++ b/node_modules/nuxt/dist/core/runtime/nitro/renderer.mjs
+@@ -1,4 +1,4 @@
+-import { createRenderer } from "vue-bundle-renderer/runtime";
++import { createRenderer, renderResourceHeaders } from "vue-bundle-renderer/runtime";
+ import { appendHeader, getQuery } from "h3";
+ import devalue from "@nuxt/devalue";
+ import { joinURL } from "ufo";
+@@ -56,7 +56,7 @@ const getSPARenderer = lazyCachedFunction(async () => {
+     ssrContext.renderMeta = ssrContext.renderMeta ?? (() => ({}));
+     return Promise.resolve(result);
+   };
+-  return { renderToString };
++  return { renderToString,rendererContext: renderer.rendererContext };
+ });
+ const PAYLOAD_CACHE = process.env.NUXT_PAYLOAD_EXTRACTION && process.env.prerender ? /* @__PURE__ */ new Map() : null;
+ const PAYLOAD_URL_RE = /\/_payload(\.[a-zA-Z0-9]+)?.js(\?.*)?$/;
+@@ -89,6 +89,13 @@ export default defineRenderHandler(async (event) => {
+     ssrContext.payload.prerenderedAt = Date.now();
+   }
+   const renderer = process.env.NUXT_NO_SSR || ssrContext.noSSR ? await getSPARenderer() : await getSSRRenderer();
++
++  // Render 103 Early Hints
++  if (!isRenderingPayload && !process.env.prerender && event.res.socket) {
++    const { link } = renderResourceHeaders({}, renderer.rendererContext)
++    // TODO: use https://github.com/nodejs/node/pull/44180 when we drop support for node 16
++    event.res.socket.write(`HTTP/1.1 103 Early Hints\r\nLink: ${link}\r\n\r\n`, 'utf-8')
++  }
+   const _rendered = await renderer.renderToString(ssrContext).catch((err) => {
+     if (!ssrError) {
+       throw ssrContext.payload?.error || err;
