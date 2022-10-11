@@ -4,13 +4,11 @@
     "build": "npx nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "patch-package"
+    "preview": "nuxt preview"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.3.3",
     "nuxt": "npm:nuxt3@latest",
-    "patch-package": "^6.4.7",
     "push-dir": "^0.4.1"
   }
 }
