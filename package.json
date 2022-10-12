@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "",
+    "build": "npx nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
