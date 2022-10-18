@@ -11,6 +11,6 @@
     "nuxt": "^3.0.0-rc.11",
     "patch-package": "^6.4.7",
     "push-dir": "^0.4.1",
-    "vue-bundle-renderer": "github:nuxt-contrib/vue-bundle-renderer"
+    "vue-bundle-renderer": "0.4.4"
   }
 }
