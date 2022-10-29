@@ -26,7 +26,23 @@ export default defineNuxtConfig({
             // these are prefixes of pages that need to be cached
             '/',
     
-          ]
+          ],
+          key: (route: string, headers: any, device: Device) => {
+    
+            // Link to the function will be broken, so cannot use any imported modules or custom functions
+            //sample of using device to generate key
+    
+            const { userAgent, ...deviceType } = device
+            const key = [route];
+            // Object.keys(deviceType).forEach(val => {
+            //   if (deviceType[val]) {
+            //     key.push(val)
+            //   }
+            // })
+            // returned value will be hashed using ohash
+            // console.log(key)
+            return key.join("-")
+          }
         }
         ],
       ],
