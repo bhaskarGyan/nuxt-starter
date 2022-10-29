@@ -11,6 +11,7 @@
     "push-dir": "^0.4.1"
   },
   "dependencies": {
+    "nuxt-cache-ssr": "^1.0.5",
     "vite-plugin-compression": "^0.5.1"
   }
 }
