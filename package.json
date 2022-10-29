@@ -7,7 +7,7 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.8",
+    "nuxt": "^3.0.0-rc.12",
     "push-dir": "^0.4.1"
   },
   "dependencies": {
