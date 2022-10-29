@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       modules: [
         ['nuxt-cache-ssr', {
           // Can be disable per enviroment, like in dev
-          enabled: true,
+          enabled: false,
           store: {
             // Plceholder for store type, will be usable after Redis Release
             type: 'memory',
@@ -26,22 +26,7 @@ export default defineNuxtConfig({
             // these are prefixes of pages that need to be cached
             '/',
     
-          ],
-          key: (route: string, headers: any, device: Device) => {
-    
-            // Link to the function will be broken, so cannot use any imported modules or custom functions
-            //sample of using device to generate key
-    
-            const { userAgent, ...deviceType } = device
-            const key = [route];
-            Object.keys(deviceType).forEach(val => {
-              if (deviceType[val]) {
-                key.push(val)
-              }
-            })
-            // returned value will be hashed using ohash
-            return key.join("-")
-          }
+          ]
         }
         ],
       ],
