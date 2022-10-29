@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       modules: [
         ['nuxt-cache-ssr', {
           // Can be disable per enviroment, like in dev
-          enabled: false,
+          enabled: true,
           store: {
             // Plceholder for store type, will be usable after Redis Release
             type: 'memory',
